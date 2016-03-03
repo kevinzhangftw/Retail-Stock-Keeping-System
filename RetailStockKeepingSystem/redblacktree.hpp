@@ -40,7 +40,7 @@ private:
     // recursive helper function for deep copy
     // creates a new node "thisnode" based on sourcenode's contents, links back to parentnode,
     //   and recurses to create left and right children
-    Node<T>* CopyTree(Node<T>* thisnode, Node<T>* sourcenode, Node<T>* parentnode);
+    Node<T>* CopyTree(Node<T>* sourcenode, Node<T>* parentnode);
     
     // recursive helper function for tree deletion
     // deallocates nodes in post-order

@@ -33,8 +33,7 @@ StockItem::StockItem(int skuid, string desc, double p)
 }
 
 // Accessors
-int StockItem::GetSKU() const
-{
+int StockItem::GetSKU() const{
     return sku;
 }
 
