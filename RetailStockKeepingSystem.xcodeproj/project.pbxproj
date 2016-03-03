@@ -1,0 +1,264 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		34C787C41C84C67B00C4E8AB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C787C31C84C67B00C4E8AB /* main.cpp */; };
+		34C787CC1C84C70C00C4E8AB /* redblacktree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C787CA1C84C70C00C4E8AB /* redblacktree.cpp */; settings = {ASSET_TAGS = (); }; };
+		34C787CE1C85032200C4E8AB /* rbtreepartial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C787CD1C85032200C4E8AB /* rbtreepartial.cpp */; settings = {ASSET_TAGS = (); }; };
+		34C787D11C85044C00C4E8AB /* stocksystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C787CF1C85044C00C4E8AB /* stocksystem.cpp */; settings = {ASSET_TAGS = (); }; };
+		34C787D41C85049200C4E8AB /* stockitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 34C787D21C85049200C4E8AB /* stockitem.cpp */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		34C787BE1C84C67B00C4E8AB /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		34C787C01C84C67B00C4E8AB /* RetailStockKeepingSystem */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RetailStockKeepingSystem; sourceTree = BUILT_PRODUCTS_DIR; };
+		34C787C31C84C67B00C4E8AB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		34C787CA1C84C70C00C4E8AB /* redblacktree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = redblacktree.cpp; sourceTree = "<group>"; };
+		34C787CB1C84C70C00C4E8AB /* redblacktree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = redblacktree.hpp; sourceTree = "<group>"; };
+		34C787CD1C85032200C4E8AB /* rbtreepartial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rbtreepartial.cpp; sourceTree = "<group>"; };
+		34C787CF1C85044C00C4E8AB /* stocksystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stocksystem.cpp; sourceTree = "<group>"; };
+		34C787D01C85044C00C4E8AB /* stocksystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = stocksystem.hpp; sourceTree = "<group>"; };
+		34C787D21C85049200C4E8AB /* stockitem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = stockitem.cpp; path = ../stockitem.cpp; sourceTree = "<group>"; };
+		34C787D31C85049200C4E8AB /* stockitem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = stockitem.hpp; path = ../stockitem.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		34C787BD1C84C67B00C4E8AB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		34C787B71C84C67B00C4E8AB = {
+			isa = PBXGroup;
+			children = (
+				34C787C21C84C67B00C4E8AB /* RetailStockKeepingSystem */,
+				34C787C11C84C67B00C4E8AB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		34C787C11C84C67B00C4E8AB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				34C787C01C84C67B00C4E8AB /* RetailStockKeepingSystem */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		34C787C21C84C67B00C4E8AB /* RetailStockKeepingSystem */ = {
+			isa = PBXGroup;
+			children = (
+				34C787C31C84C67B00C4E8AB /* main.cpp */,
+				34C787CA1C84C70C00C4E8AB /* redblacktree.cpp */,
+				34C787CB1C84C70C00C4E8AB /* redblacktree.hpp */,
+				34C787D21C85049200C4E8AB /* stockitem.cpp */,
+				34C787D31C85049200C4E8AB /* stockitem.hpp */,
+				34C787CD1C85032200C4E8AB /* rbtreepartial.cpp */,
+				34C787CF1C85044C00C4E8AB /* stocksystem.cpp */,
+				34C787D01C85044C00C4E8AB /* stocksystem.hpp */,
+			);
+			path = RetailStockKeepingSystem;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		34C787BF1C84C67B00C4E8AB /* RetailStockKeepingSystem */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 34C787C71C84C67B00C4E8AB /* Build configuration list for PBXNativeTarget "RetailStockKeepingSystem" */;
+			buildPhases = (
+				34C787BC1C84C67B00C4E8AB /* Sources */,
+				34C787BD1C84C67B00C4E8AB /* Frameworks */,
+				34C787BE1C84C67B00C4E8AB /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RetailStockKeepingSystem;
+			productName = RetailStockKeepingSystem;
+			productReference = 34C787C01C84C67B00C4E8AB /* RetailStockKeepingSystem */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		34C787B81C84C67B00C4E8AB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Kevin Zhang";
+				TargetAttributes = {
+					34C787BF1C84C67B00C4E8AB = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 34C787BB1C84C67B00C4E8AB /* Build configuration list for PBXProject "RetailStockKeepingSystem" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 34C787B71C84C67B00C4E8AB;
+			productRefGroup = 34C787C11C84C67B00C4E8AB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				34C787BF1C84C67B00C4E8AB /* RetailStockKeepingSystem */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		34C787BC1C84C67B00C4E8AB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				34C787C41C84C67B00C4E8AB /* main.cpp in Sources */,
+				34C787D11C85044C00C4E8AB /* stocksystem.cpp in Sources */,
+				34C787CC1C84C70C00C4E8AB /* redblacktree.cpp in Sources */,
+				34C787CE1C85032200C4E8AB /* rbtreepartial.cpp in Sources */,
+				34C787D41C85049200C4E8AB /* stockitem.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		34C787C51C84C67B00C4E8AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		34C787C61C84C67B00C4E8AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		34C787C81C84C67B00C4E8AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		34C787C91C84C67B00C4E8AB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		34C787BB1C84C67B00C4E8AB /* Build configuration list for PBXProject "RetailStockKeepingSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34C787C51C84C67B00C4E8AB /* Debug */,
+				34C787C61C84C67B00C4E8AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		34C787C71C84C67B00C4E8AB /* Build configuration list for PBXNativeTarget "RetailStockKeepingSystem" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				34C787C81C84C67B00C4E8AB /* Debug */,
+				34C787C91C84C67B00C4E8AB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 34C787B81C84C67B00C4E8AB /* Project object */;
+}
