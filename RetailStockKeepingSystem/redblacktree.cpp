@@ -61,7 +61,7 @@ RedBlackTree<T>::RedBlackTree(const RedBlackTree<T>& rbtree){
 template <class T>
 RedBlackTree<T>::~RedBlackTree(){
  //:TODO
-    RemoveAll();
+//RemoveAll();
 }
 
 // overloaded assignment operator
@@ -78,7 +78,9 @@ RedBlackTree<T>& RedBlackTree<T>::operator=(const RedBlackTree<T>& rbtree){
 // Otherwise, insert, increment size, and return true.
 template <class T>
 bool RedBlackTree<T>::Insert(T item){
+    
     BSTInsert(item);
+    
     //:TODO
     
     return false;
