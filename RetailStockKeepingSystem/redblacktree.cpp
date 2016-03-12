@@ -82,7 +82,7 @@ template <class T>
 bool RedBlackTree<T>::Insert(T item){
     
     BSTInsert(item);
-    
+    size++;
     //:TODO
     
     return false;

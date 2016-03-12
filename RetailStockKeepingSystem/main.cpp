@@ -145,31 +145,25 @@ void PrintMenu()
     cout << "Enter your choice: ";
 }
 
-void printState(RedBlackTree<int> tree) {
-    cout << "Tree contains " << tree.Size() << " entries." << endl;
-    cout << "Tree height: " << tree.Height() << endl;
-    
-}
 
 void RBTreeTest() {
     RedBlackTree<int> tree1;
-    
-    printState(tree1);
+    tree1.printState();
     
     tree1.Insert(1);
-    printState(tree1);
+    tree1.printState();
     
     tree1.Insert(3);
-    printState(tree1);
+    tree1.printState();
     
     tree1.Insert(2); // should cause 2 rotations to occur
-    printState(tree1);
+    tree1.printState();
     
     tree1.Insert(4);
-    printState(tree1);
+    tree1.printState();
     
     tree1.Remove(4);
-    printState(tree1);
+    tree1.printState();
     
     RedBlackTree<int> tree2(tree1);
     
