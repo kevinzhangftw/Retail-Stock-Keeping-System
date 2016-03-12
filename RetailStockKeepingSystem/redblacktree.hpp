@@ -10,6 +10,8 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <string>
+#include <iostream>
+
 using namespace std;
 
 template <class T>
@@ -125,7 +127,31 @@ public:
         return this->root;
     }
     
+<<<<<<< HEAD
     void print();
+=======
+    void preorderPrint(Node<T> * node, int counter) {
+        if (node != NULL) {
+            for (int i = 0; i < counter; i++) {
+                cout << "..";
+            }
+            cout << node->data << endl;
+            
+            if (node->left != NULL)
+                preorderPrint(node->left, counter + 1);
+            
+            if (node->right != NULL)
+                preorderPrint(node->right, counter + 1);
+        }
+    }
+    
+    void printState(){
+        cout << "Size: " << Size() << endl;
+        cout << "Height: " << Height() << endl;
+        preorderPrint(this->root, 0);
+        cout << endl;
+    }
+>>>>>>> efb80c721de4f3562f7fb2495da0a3464675f4f3
 };
 
 // include functions completed by instructor

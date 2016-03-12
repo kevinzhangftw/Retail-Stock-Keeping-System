@@ -82,6 +82,10 @@ template <class T>
 bool RedBlackTree<T>::Insert(T item){
     
     BSTInsert(item);
+<<<<<<< HEAD
+=======
+    size++;
+>>>>>>> efb80c721de4f3562f7fb2495da0a3464675f4f3
     //:TODO
     
     
