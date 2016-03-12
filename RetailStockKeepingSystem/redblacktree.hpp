@@ -124,6 +124,8 @@ public:
     {
         return this->root;
     }
+    
+    void print();
 };
 
 // include functions completed by instructor
