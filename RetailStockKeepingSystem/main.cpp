@@ -26,6 +26,7 @@ int main()
 {
     RBTreeTest();
     
+    
     int choice = 0;
     string inputchoice;
     int asku;
@@ -144,18 +145,31 @@ void PrintMenu()
     cout << "Enter your choice: ";
 }
 
-void RBTreeTest()
-{
+void printState(RedBlackTree<int> tree) {
+    cout << "Tree contains " << tree.Size() << " entries." << endl;
+    cout << "Tree height: " << tree.Height() << endl;
+    
+}
+
+void RBTreeTest() {
     RedBlackTree<int> tree1;
     
-    tree1.Insert(1);
-    tree1.Insert(3);
-    tree1.Insert(2); // should cause 2 rotations to occur
-    tree1.Insert(4);
-    tree1.Remove(4);
+    printState(tree1);
     
-    cout << "Tree contains " << tree1.Size() << " entries." << endl;
-    cout << "Tree height: " << tree1.Height() << endl;
+    tree1.Insert(1);
+    printState(tree1);
+    
+    tree1.Insert(3);
+    printState(tree1);
+    
+    tree1.Insert(2); // should cause 2 rotations to occur
+    printState(tree1);
+    
+    tree1.Insert(4);
+    printState(tree1);
+    
+    tree1.Remove(4);
+    printState(tree1);
     
     RedBlackTree<int> tree2(tree1);
     
@@ -165,3 +179,5 @@ void RBTreeTest()
     tree3.Insert(5);
     tree3 = tree2;
 }
+
+

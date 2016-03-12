@@ -53,6 +53,8 @@ template <class T>
 RedBlackTree<T>::RedBlackTree(const RedBlackTree<T>& rbtree){
     //:TODO
     //copytree helper func used here
+    root = NULL;
+    size = 0;
     
 }
 
