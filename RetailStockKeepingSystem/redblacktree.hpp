@@ -11,6 +11,7 @@
 #include <stdexcept>
 #include <string>
 #include <iostream>
+#include <assert.h>
 
 using namespace std;
 
@@ -91,6 +92,20 @@ public:
     // Otherwise, insert, increment size, and return true.
     bool Insert(T item);
     
+    void insert_case1(Node<T> *node);
+    void insert_case2(Node<T> *node);
+    void insert_case3(Node<T> *node);
+    void insert_case4(Node<T> *node);
+    void insert_case5(Node<T> *node);
+    
+    Node<T>* uncle(Node<T> *node);
+    Node<T>* grandparent(Node<T> *node);
+    Node<T>* sibling(Node<T> *node);
+    
+    
+    void verify_properties(Node<T> *node);
+    void verify_property_4(Node<T> * node);
+    
     // Removal of an item from the tree.
     // Must deallocate deleted node after RBDeleteFixUp returns
     bool Remove(T item);
@@ -127,11 +142,19 @@ public:
         return this->root;
     }
     
+    void InsertFix(Node<T> *node);
+    
     void preorderPrint(Node<T> * node, int counter) {
         if (node != NULL) {
-            for (int i = 0; i < counter; i++) {
-                cout << "..";
+            for (int i = 0; i <= counter; i++) {
+                if (node->is_black) {
+                    cout << "..";
+                } else {
+                    cout << ",,";
+                }
+                
             }
+            
             cout << node->data << endl;
             
             if (node->left != NULL)
