@@ -80,14 +80,23 @@ RedBlackTree<T>& RedBlackTree<T>::operator=(const RedBlackTree<T>& rbtree){
 // Otherwise, insert, increment size, and return true.
 template <class T>
 bool RedBlackTree<T>::Insert(T item){
-    
-    BSTInsert(item);
-<<<<<<< HEAD
-=======
+    Node<T>* x = BSTInsert(item);
     size++;
->>>>>>> efb80c721de4f3562f7fb2495da0a3464675f4f3
     //:TODO
-    
+    x->is_black = false;
+    while (x!=root && x->p->is_black == false) {
+        if (x->p == x->p->p->left) {
+            Node<T>* y = x->p->p->right;
+            if (y->is_black == false) { //same as x->p
+                y->is_black = true;
+                x->p->is_black = true;
+                x->p->p->is_black = false;
+                x=x->p->p
+            }else{ //y->isblack
+                
+            }
+        }
+    }
     
     return false;
 }

@@ -150,13 +150,13 @@ void RBTreeTest() {
     RedBlackTree<int> tree1;
     tree1.printState();
     
+    tree1.Insert(2);
+    tree1.printState();
+    
     tree1.Insert(1);
     tree1.printState();
     
-    tree1.Insert(3);
-    tree1.printState();
-    
-    tree1.Insert(2); // should cause 2 rotations to occur
+    tree1.Insert(3); // should cause 2 rotations to occur
     tree1.printState();
     
     tree1.Insert(4);

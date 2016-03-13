@@ -127,9 +127,7 @@ public:
         return this->root;
     }
     
-<<<<<<< HEAD
     void print();
-=======
     void preorderPrint(Node<T> * node, int counter) {
         if (node != NULL) {
             for (int i = 0; i < counter; i++) {
@@ -151,7 +149,7 @@ public:
         preorderPrint(this->root, 0);
         cout << endl;
     }
->>>>>>> efb80c721de4f3562f7fb2495da0a3464675f4f3
+
 };
 
 // include functions completed by instructor
