@@ -10,34 +10,59 @@
 // default constructor;
 // begin with a balance of $100,000.00
 StockSystem::StockSystem(){
-    //:TODO
     balance = 100000;
 }
 
 // returns the balance member
 double StockSystem::GetBalance(){
-    //:TODO
     return balance;
 }
 
 // Add a new SKU to the system. Do not allow insertion of duplicate sku
 bool StockSystem::StockNewItem(StockItem item){
-    //:TODO
-    return false;
+    if (records.Search(item)) {
+        return false;
+    }else{
+        records.Insert(item);
+        return true;
+    }
 }
 
 // Locate the item with key itemsku and update its description field.
 // Return false if itemsku is not found.
 bool StockSystem::EditStockItemDescription(int itemsku, string desc){
-    //:TODO
-    return false;
+    //init an stockitem
+    StockItem inputItem =  StockItem(itemsku, desc, 0);
+    //search this identical item, if it is found return a pointer to it
+    StockItem* valueRetreived = records.Retrieve(inputItem);
+    //if the pointer is null, must be that retrieve failed
+    if (valueRetreived == NULL) {
+        return false;
+    }else{
+        valueRetreived->SetDescription(desc);
+        return true;
+    }
 }
 
 // Locate the item with key itemsku and update its description field.
 // Return false if itemsku is not found or retailprice is negative.
 bool StockSystem::EditStockItemPrice(int itemsku, double retailprice){
-    //:TODO
-    return false;
+    //init an stockitem
+    StockItem inputItem =  StockItem(itemsku, "ignore this message", retailprice);
+    //search this identical item, if it is found return a pointer to it
+    StockItem* valueRetreived = records.Retrieve(inputItem);
+    //if the pointer is null, must be that retrieve failed
+    if (valueRetreived == NULL) {
+        return false;
+    }else{
+        //check negative pricing
+        if (valueRetreived->GetPrice() < 0) {
+            return false;
+        }else{
+            valueRetreived->SetPrice(retailprice);
+            return true;
+        }
+    }
 }
 
 // Purchase quantity of item at unitprice each, to reach a maximum (post-purchase) on-hand stock quantity of 1000.
@@ -46,8 +71,21 @@ bool StockSystem::EditStockItemPrice(int itemsku, double retailprice){
 // Otherwise, return true and increase the item's on-hand stock by quantity,
 //   and reduce balance by quantity*unitprice.
 bool StockSystem::Restock(int itemsku, int quantity, double unitprice){
-    //:TODO
-    return false;
+    //to reach a maximum (post-purchase) on-hand stock quantity of 1000.
+    if (balance < quantity*unitprice) {
+        return false;
+    }
+    StockItem inputItem =  StockItem(itemsku, "ignore this message", unitprice);
+    //search this identical item, if it is found return a pointer to it
+    StockItem* valueRetreived = records.Retrieve(inputItem);
+    //if the pointer is null, must be that retrieve failed
+    if (valueRetreived == NULL||quantity<0||(valueRetreived->GetStock()+quantity)>1000||unitprice<0){
+        return false;
+    }else{
+        valueRetreived->SetStock(valueRetreived->GetStock()+quantity);
+        balance = balance-(quantity*unitprice);
+        return true;
+    }
 }
 
 // Sell an item to a customer, if quantity of stock is available and SKU exists.

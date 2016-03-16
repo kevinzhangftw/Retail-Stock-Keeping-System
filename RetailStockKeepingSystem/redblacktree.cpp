@@ -91,7 +91,7 @@ bool RedBlackTree<T>::Insert(T item){
                 y->is_black = true;
                 x->p->is_black = true;
                 x->p->p->is_black = false;
-                x=x->p->p
+                x=x->p->p;
             }else{ //y->isblack
                 
             }
@@ -106,8 +106,33 @@ bool RedBlackTree<T>::Insert(T item){
 template <class T>
 bool RedBlackTree<T>::Remove(T item){
     //:TODO
+    if (Search(item)) {
+        //get that node
+        Node<T>* node = root;
+        Node<T>* x, y, z;
+        while (node != NULL){
+            if (item == node->data){
+                z = node;
+                return true;
+            }else if (item < node->data){
+                node = node->left;
+            }else{
+                node = node->right;
+            }
+        }
+        
+        //now we have node we begin the removal
+        if (z->left == NULL || z->right == NULL) {
+            y=z;
+        }else{
+            y= Predecessor(z);
+        }
+        
+        
+    }else{
+        return false;
+    }
     
-    return false;
 }
 
 

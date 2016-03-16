@@ -6,8 +6,7 @@
 #include "stockitem.hpp"
 
 // Default constructor
-StockItem::StockItem()
-{
+StockItem::StockItem(){
     sku = 0;
     description = "";
     price = 0;

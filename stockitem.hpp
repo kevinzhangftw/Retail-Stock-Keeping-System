@@ -10,8 +10,7 @@
 
 using namespace std;
 
-class StockItem
-{
+class StockItem{
 private:
     int sku;   // unique identifier for stock keeping unit, range [10000, 99999] (5 digits)
     string description; // product name, maximum length of

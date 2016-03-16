@@ -10,8 +10,7 @@
 #include "stockitem.hpp"
 #include "redblacktree.hpp"
 
-class StockSystem
-{
+class StockSystem{
 private:
     RedBlackTree<StockItem> records;
     double balance; // how much money you have in the bank
