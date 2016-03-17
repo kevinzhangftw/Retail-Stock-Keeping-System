@@ -83,18 +83,26 @@ bool RedBlackTree<T>::Insert(T item){
     Node<T>* x = BSTInsert(item);
     size++;
     //:TODO
-    x->is_black = false;
-    while (x!=root && x->p->is_black == false) {
-        if (x->p == x->p->p->left) {
-            Node<T>* y = x->p->p->right;
-            if (y->is_black == false) { //same as x->p
-                y->is_black = true;
-                x->p->is_black = true;
-                x->p->p->is_black = false;
-                x=x->p->p;
-            }else{ //y->isblack
-                
+    x->is_black = false; //first thing i do is color this red
+    while (x!=root && x->p->is_black == false) { //traverse up the tree till we have a black p
+        if (x->p == x->p->p->left) { //x's parent is grandparent's left child
+            Node<T>* y = x->p->p->right; //init y to be the sibling of x's p
+            if (y->is_black == false) { //and x->p is red we have matching reds
+                y->is_black = true; //y to black
+                x->p->is_black = true; //x.p to black
+                x->p->p->is_black = false; // grand parent to red
+                x=x->p->p; //move x upwards
+            }else{ //y->isblack, but x.p is red then we have two cases to consider
+                if (x == x->p->right) { //this means x is x.p's right child
+                    x= x->p;
+                    LeftRotate(x); //we preform left rotation to bring x inline w/ x.p and x.p.p
+                }
+                //once we are in line, we can preform right rotate to balance the tree
+                x->p->is_black = true; //x is red, x.p is black
+                x->p->p->is_black = false; //x.p is black , so x.p.p should be red
             }
+        }else{ //now we handle the symmetric side
+            
         }
     }
     

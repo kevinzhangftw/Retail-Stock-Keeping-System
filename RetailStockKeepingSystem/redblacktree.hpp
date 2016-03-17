@@ -127,6 +127,7 @@ public:
         return this->root;
     }
     
+    //test func :TODO  :TO BE REMOVED
     void print();
     void preorderPrint(Node<T> * node, int counter) {
         if (node != NULL) {
@@ -143,6 +144,7 @@ public:
         }
     }
     
+    //test func :TODO  :TO BE REMOVED
     void printState(){
         cout << "Size: " << Size() << endl;
         cout << "Height: " << Height() << endl;
