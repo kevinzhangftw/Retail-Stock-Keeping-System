@@ -31,7 +31,59 @@ void RedBlackTree<T>::RemoveAll(Node<T>* node){
 // Note that the parameter x may be NULL
 template <class T>
 void RedBlackTree<T>::RBDeleteFixUp(Node<T>* x, Node<T>* xparent, bool xisleftchild){
-    //:TODO
+    Node<T>* y = NULL;
+    while (x != root && x->is_black == true) {
+        if (xisleftchild == true) {
+            y = x->p->right; //y must be x's sibling
+            if (y->is_black == false) {
+                y->is_black = true;
+                x->p->is_black = false; //x' parent must be black since y is red
+                LeftRotate(x->p);
+                y = x->p->right; //black height unchanged but x sibling is now black
+            }
+            if (y->left->is_black == true && y->right->is_black == true) {
+                y->is_black = false;
+                x = x->p;
+            }else{
+                if (y->right->is_black == true) {
+                    y->left->is_black = true;
+                    y->is_black = false;
+                    RightRotate(y);
+                    y=x->p->right;
+                }
+                y->is_black = x->p->is_black;
+                x->p->is_black = true;
+                y->right->is_black = true;
+                LeftRotate(x->p);
+                x = root;
+            }
+        }else{
+            //TODO
+            y = x->p->left; //y must be x's sibling
+            if (y->is_black == false) {
+                y->is_black = true;
+                x->p->is_black = false; //x' parent must be black since y is red
+                RightRotate(x->p);
+                y = x->p->right; //black height unchanged but x sibling is now black
+            }
+            if (y->left->is_black == true && y->right->is_black == true) {
+                y->is_black = false;
+                x = x->p;
+            }else{
+                if (y->right->is_black == true) {
+                    y->left->is_black = true;
+                    y->is_black = false;
+                    RightRotate(y);
+                    y=x->p->left;
+                }
+                y->is_black = x->p->is_black;
+                x->p->is_black = true;
+                y->right->is_black = true;
+                RightRotate(x->p);
+                x = root;
+            }
+        }
+    }
 }
 
 // Calculates the height of the tree
@@ -82,7 +134,6 @@ template <class T>
 bool RedBlackTree<T>::Insert(T item){
     Node<T>* x = BSTInsert(item);
     size++;
-    //:TODO
     x->is_black = false; //first thing i do is color this red
     while (x!=root && x->p->is_black == false) { //traverse up the tree till we have a black p
         if (x->p == x->p->p->left) { //x's parent is grandparent's left child
@@ -100,9 +151,24 @@ bool RedBlackTree<T>::Insert(T item){
                 //once we are in line, we can preform right rotate to balance the tree
                 x->p->is_black = true; //x is red, x.p is black
                 x->p->p->is_black = false; //x.p is black , so x.p.p should be red
+                RightRotate(x->p->p);
             }
         }else{ //now we handle the symmetric side
-            
+            Node<T>* y = x->p->p->left;
+            if (y->is_black == false) {
+                y->is_black = true;
+                x->p->is_black = true; //x.p to black
+                x->p->p->is_black = false; // grand parent to red
+                x=x->p->p;
+            }else{ // y and x.p have different color
+                if (x==x->p->left) { // x not in line with x.p and x.p.p
+                    x= x->p;
+                    RightRotate(x);
+                }
+                x->p->is_black = true; //x is red, x.p is black
+                x->p->p->is_black = false; //x.p is black , so x.p.p should be red
+                LeftRotate(x->p->p);
+            }
         }
     }
     
@@ -114,33 +180,59 @@ bool RedBlackTree<T>::Insert(T item){
 template <class T>
 bool RedBlackTree<T>::Remove(T item){
     //:TODO
+    //first we need to track the node
     if (Search(item)) {
-        //get that node
         Node<T>* node = root;
-        Node<T>* x, y, z;
+        Node<T>* x = NULL;
+        Node<T>* y = NULL;
+        Node<T>* z = NULL;
         while (node != NULL){
-            if (item == node->data){
-                z = node;
-                return true;
-            }else if (item < node->data){
-                node = node->left;
-            }else{
-                node = node->right;
-            }
+            if (item == node->data)
+                z = node; //ok we found this node , time for magic to happen
+            else if (item < node->data)
+                node = node->left; //traverse left
+            else
+                node = node->right; //traverse right
+        }
+        //fun begins here
+        if (z->left==NULL || z->right==NULL) { //z has one child or z has no child
+            y= z; //instead of delete z we will copy over the data and delete y
+        }else{ //z has two children
+            y=Predecessor(z);
         }
         
-        //now we have node we begin the removal
-        if (z->left == NULL || z->right == NULL) {
-            y=z;
+        if (y->left != NULL) { //in this case we only check if y's one child is left or right
+            x = y->left; //because y is predessor , y must not have right child
         }else{
-            y= Predecessor(z);
+            x = y->right; // if z only has one child and it is right one
         }
         
+        x->p = y->p; //attach x upwards
         
+        if (y->p == NULL) { //if y has no parents, then root should be x
+            root = x;
+        }else{
+            if (y == y->p->left) {
+                y->p->left = x;
+            }else{
+                y->p->right = x;
+            }//attach x downwards from y
+        }
+        
+        if (y != z) {
+            z->data = y->data;
+        }//this happens when y is predessor of z
+        //if y is red then no problemo
+        if (y->is_black == true) { //but y is black the bh property si voilated
+            RBDeleteFixUp(x, y->p, true);
+        }
+        
+        delete y;
+        size--;
+        return true;
     }else{
-        return false;
+        return false; //cant do anything if we cant find the node to delete
     }
-    
 }
 
 
