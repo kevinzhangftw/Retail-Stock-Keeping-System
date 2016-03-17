@@ -93,6 +93,21 @@ bool StockSystem::Restock(int itemsku, int quantity, double unitprice){
 // If partial stock (less than quantity) available, sell the available stock and return true.
 // If no stock, sku does not exist, or quantity is negative, return false.
 bool StockSystem::Sell(int itemsku, int quantity){
-    //:TODO
-    return false;
+    StockItem inputItem =  StockItem(itemsku, "ignore this message", 0.00);
+    //search this identical item, if it is found return a pointer to it
+    StockItem* valueRetreived = records.Retrieve(inputItem);
+    //if the pointer is null, must be that retrieve failed
+    if (valueRetreived == NULL || quantity <=0 || valueRetreived->GetStock()<=0) {
+        return false;
+    }else{
+        if (valueRetreived->GetStock()<=quantity) {
+            balance = balance + (valueRetreived->GetStock())*(valueRetreived->GetPrice());
+            valueRetreived->SetStock(0);
+            return true;
+        }else{
+            valueRetreived->SetStock(valueRetreived->GetStock()-quantity);
+            balance = balance + quantity*(valueRetreived->GetPrice());
+            return true;
+        }
+    }
 }
