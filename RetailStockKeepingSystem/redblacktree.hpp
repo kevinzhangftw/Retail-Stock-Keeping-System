@@ -151,6 +151,52 @@ public:
         preorderPrint(this->root, 0);
         cout << endl;
     }
+    
+    int rb_assert(Node<T> *root){
+        
+        int lh, rh;
+        if (root == NULL){
+            return 1;
+        }else{
+            Node<T>* ln = root->left;
+            Node<T>* rn = root->right;
+            
+            /* Consecutive red links */
+            if (root->is_black == false){
+                if (ln->is_black == false || rn->is_black == false){
+                    puts("Red violation");
+                    return 0;
+                }
+            }
+            
+            lh = rb_assert(ln);
+            rh = rb_assert(rn);
+            
+            /* Invalid binary search tree */
+            if ((ln != NULL && ln->data >= root->data) || (rn != NULL && rn->data <= root->data))
+            {
+                puts("Binary tree violation");
+                return 0;
+            }
+            
+            /* Black height mismatch */
+            if (lh != 0 && rh != 0 && lh != rh)
+            {
+                puts("Black violation");
+                return 0;
+            }
+            
+            /* Only count black links */
+            if (lh != 0 && rh != 0)
+            {
+                return root->is_black == false ? lh : lh + 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
 
 };
 

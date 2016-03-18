@@ -12,8 +12,24 @@
 //   and recurses to create left and right children
 template <class T>
 Node<T>* RedBlackTree<T>::CopyTree(Node<T>* sourcenode, Node<T>* parentnode){
-    //:TODO
+    Node<T>* newnode = new Node<T>(sourcenode->data);
+    newnode->p = parentnode;
+    newnode->is_black = sourcenode->is_black;
+    if (!parentnode) {
+        root = newnode;
+    }else if (sourcenode == sourcenode->p->left){
+        parentnode->left = newnode;
+    }else{
+        parentnode->right = newnode;
+    }
     
+    if (sourcenode->left != NULL) {
+        CopyTree(sourcenode->left, newnode);
+    }
+    if (sourcenode->right != NULL) {
+        CopyTree(sourcenode->right, newnode);
+    }
+    return newnode;
 }
 
 // recursive helper function for tree deletion
@@ -58,7 +74,6 @@ void RedBlackTree<T>::RBDeleteFixUp(Node<T>* x, Node<T>* xparent, bool xisleftch
                 x = root;
             }
         }else{
-            //TODO
             y = x->p->left; //y must be x's sibling
             if (y->is_black == false) {
                 y->is_black = true;
@@ -90,7 +105,16 @@ void RedBlackTree<T>::RBDeleteFixUp(Node<T>* x, Node<T>* xparent, bool xisleftch
 // Requires a traversal of the tree, O(n)
 template <class T>
 int RedBlackTree<T>::CalculateHeight(Node<T>* node) const{
-   //:TODO
+    if (node != NULL){
+        // recurse on left child
+        int h1 = CalculateHeight(node->left);
+        int h2 = CalculateHeight(node->right);
+        if (h1 >= 2){
+            return h1 + 1;
+        }
+        else return h2 + 1;
+    }
+    else return -1;
 }
 
 // default constructor
@@ -103,25 +127,25 @@ RedBlackTree<T>::RedBlackTree(){
 // copy constructor, performs deep copy of parameter
 template <class T>
 RedBlackTree<T>::RedBlackTree(const RedBlackTree<T>& rbtree){
-    //:TODO
-    //copytree helper func used here
-    root = NULL;
-    size = 0;
-    
+    CopyTree(rbtree.root, NULL);
+    size = rbtree.size;
 }
 
 // destructor
 // Must deallocate memory associated with all nodes in tree
 template <class T>
 RedBlackTree<T>::~RedBlackTree(){
- //:TODO
-//RemoveAll();
+    RemoveAll();
+    root = NULL;
 }
 
 // overloaded assignment operator
 template <class T>
 RedBlackTree<T>& RedBlackTree<T>::operator=(const RedBlackTree<T>& rbtree){
-    //:TODO
+    if (this != &rbtree){
+        this->root = rbtree.root;
+        this->size = rbtree.size;
+    }
     return *this;
 }
 
@@ -132,54 +156,61 @@ RedBlackTree<T>& RedBlackTree<T>::operator=(const RedBlackTree<T>& rbtree){
 // Otherwise, insert, increment size, and return true.
 template <class T>
 bool RedBlackTree<T>::Insert(T item){
-    Node<T>* x = BSTInsert(item);
-    size++;
-    x->is_black = false; //first thing i do is color this red
-    while (x!=root && x->p->is_black == false) { //traverse up the tree till we have a black p
-        if (x->p == x->p->p->left) { //x's parent is grandparent's left child
-            Node<T>* y = x->p->p->right; //init y to be the sibling of x's p
-            if (y->is_black == false) { //and x->p is red we have matching reds
-                y->is_black = true; //y to black
-                x->p->is_black = true; //x.p to black
-                x->p->p->is_black = false; // grand parent to red
-                x=x->p->p; //move x upwards
-            }else{ //y->isblack, but x.p is red then we have two cases to consider
-                if (x == x->p->right) { //this means x is x.p's right child
-                    x= x->p;
-                    LeftRotate(x); //we preform left rotation to bring x inline w/ x.p and x.p.p
+    rb_assert(root); //check the structure
+    if (Search(item)== true) {
+        return false; // still have the item
+    }else{
+        Node<T>* x = BSTInsert(item);
+        size++;
+        if (x == root ) {
+            x->is_black = true;
+        }else{
+            x->is_black = false; //first thing i do is color this red
+        }
+        while (x!=root && x->p->is_black == false) { //traverse up the tree till we have a black p
+            if (x->p == x->p->p->left) { //x's parent is grandparent's left child
+                Node<T>* y = x->p->p->right; //init y to be the sibling of x's p
+                if (y->is_black == false) { //and x->p is red we have matching reds
+                    y->is_black = true; //y to black
+                    x->p->is_black = true; //x.p to black
+                    x->p->p->is_black = false; // grand parent to red
+                    x=x->p->p; //move x upwards
+                }else{ //y->isblack, but x.p is red then we have two cases to consider
+                    if (x == x->p->right) { //this means x is x.p's right child
+                        x= x->p;
+                        LeftRotate(x); //we preform left rotation to bring x inline w/ x.p and x.p.p
+                    }
+                    //once we are in line, we can preform right rotate to balance the tree
+                    x->p->is_black = true; //x is red, x.p is black
+                    x->p->p->is_black = false; //x.p is black , so x.p.p should be red
+                    RightRotate(x->p->p);
                 }
-                //once we are in line, we can preform right rotate to balance the tree
-                x->p->is_black = true; //x is red, x.p is black
-                x->p->p->is_black = false; //x.p is black , so x.p.p should be red
-                RightRotate(x->p->p);
-            }
-        }else{ //now we handle the symmetric side
-            Node<T>* y = x->p->p->left;
-            if (y->is_black == false) {
-                y->is_black = true;
-                x->p->is_black = true; //x.p to black
-                x->p->p->is_black = false; // grand parent to red
-                x=x->p->p;
-            }else{ // y and x.p have different color
-                if (x==x->p->left) { // x not in line with x.p and x.p.p
-                    x= x->p;
-                    RightRotate(x);
+            }else{ //now we handle the symmetric side
+                Node<T>* y = x->p->p->left;
+                if (y->is_black == false) {
+                    y->is_black = true;
+                    x->p->is_black = true; //x.p to black
+                    x->p->p->is_black = false; // grand parent to red
+                    x=x->p->p;
+                }else{ // y and x.p have different color
+                    if (x==x->p->left) { // x not in line with x.p and x.p.p
+                        x= x->p;
+                        RightRotate(x);
+                    }
+                    x->p->is_black = true; //x is red, x.p is black
+                    x->p->p->is_black = false; //x.p is black , so x.p.p should be red
+                    LeftRotate(x->p->p);
                 }
-                x->p->is_black = true; //x is red, x.p is black
-                x->p->p->is_black = false; //x.p is black , so x.p.p should be red
-                LeftRotate(x->p->p);
             }
         }
+        return true;
     }
-    
-    return false;
 }
 
 // Removal of an item from the tree.
 // Must deallocate deleted node after RBDeleteFixUp returns
 template <class T>
 bool RedBlackTree<T>::Remove(T item){
-    //:TODO
     //first we need to track the node
     if (Search(item)) {
         Node<T>* node = root;
@@ -239,20 +270,20 @@ bool RedBlackTree<T>::Remove(T item){
 // deletes all nodes in the tree. Calls recursive helper function.
 template <class T>
 void RedBlackTree<T>::RemoveAll(){
-    RemoveAll(root);
+    if (size != 0) RemoveAll(root);
+    size = 0;
 }
 
 // returns the number of items in the tree
 template <class T>
 int RedBlackTree<T>::Size() const{
-    return size;
+    return this->size;
 }
 
 // returns the height of the tree, from root to deepest null child. Calls recursive helper function.
 // Note that an empty tree should have a height of 0, and a tree with only one node will have a height of 1.
 template <class T>
 int RedBlackTree<T>::Height() const{
-    //:TODO
-    return 0;
+     return CalculateHeight(root);
 }
 #endif
