@@ -162,6 +162,14 @@ void RBTreeTest() {
     tree1.Insert(4);
     tree1.printState();
     
+    tree1.Insert(5);
+    
+    tree1.Insert(6);
+    
+    tree1.Insert(7);
+    
+    tree1.Insert(10);
+    
     tree1.Remove(4);
     tree1.printState();
     

@@ -6,10 +6,6 @@
 #ifdef _REDBLACKTREE_H_
 
 #include <math.h>
-#include <iostream>
-#include <string>
-#include <cstdlib>
-
 
 /*
  
@@ -44,39 +40,6 @@
 template <class T>
 Node<T>* RedBlackTree<T>::CopyTree(Node<T>* sourcenode, Node<T>* parentnode)
 {
-    /*
-     Node<T>* newnode = new Node<T>(sourcenode->data);
-     newnode->p = parentnode;
-     newnode->is_black = sourcenode->is_black;
-     if (sourcenode->left != NULL) {
-     CopyTree(sourcenode->left, newnode);
-     }
-     if (sourcenode->right != NULL) {
-     CopyTree(sourcenode->right, newnode);
-     }
-     return newnode;
-     
-     Node<T>* newnode = BSTInsert(sourcenode->data);
-     if (!parentnode)
-     {
-     root = newnode;
-     newnode->p = NULL;
-     }
-     newnode->is_black = sourcenode->is_black;
-     newnode->p = parentnode;
-     CopyTree(sourcenode->left, newnode);
-     CopyTree(sourcenode->right, newnode);
-     Node<T>* newnode = new Node<T>(sourcenode->data);
-     // newnode->p = parentnode;
-     newnode->is_black = sourcenode->is_black;
-     
-     
-     else newnode = BSTInsert(sourcenode->data);
-     
-     
-     CopyTree(sourcenode->left, newnode);
-     CopyTree(sourcenode->right, newnode);
-     */
     Node<T>* newnode = new Node<T>(sourcenode->data);
     newnode->p = parentnode;
     newnode->is_black = sourcenode->is_black;
@@ -125,25 +88,25 @@ template <class T>
 void RedBlackTree<T>::RBDeleteFixUp(Node<T>* x, Node<T>* xparent, bool xisleftchild)
 {
     Node<T>* y;
-    while (x != root and x->is_black )
+    while (x != root and (!x or x->is_black) )
         if (xisleftchild) // x is left child
         {
             y = xparent->right; // x’s sibling
-            if (y->is_black == false)
+            if (y and y->is_black == false)
             {
                 y->is_black = true;
                 xparent->is_black = false; // p was black
                 LeftRotate(xparent);
                 y = xparent->right;
             }
-            if (y->left->is_black == true and y->right->is_black == true)
+            if ((!y->left or y->left->is_black == true) and (!y->right or y->right->is_black == true))
             {
                 y->is_black = false;
                 x = xparent;
             }
             else
             {
-                if (y->right->is_black == true)
+                if (!y or y->right->is_black == true)
                 {
                     y->left->is_black = true;
                     y->is_black = false;
@@ -188,6 +151,7 @@ void RedBlackTree<T>::RBDeleteFixUp(Node<T>* x, Node<T>* xparent, bool xisleftch
                 x = root;
             }
         }
+    x->is_black = true;
     return;
 }
 
@@ -207,7 +171,7 @@ int RedBlackTree<T>::CalculateHeight(Node<T>* node) const
         }
         else return h2 + 1;
     }
-    else return -1;
+    else return 0;
 }
 
 // default constructor
@@ -254,7 +218,6 @@ RedBlackTree<T>& RedBlackTree<T>::operator=(const RedBlackTree<T>& rbtree)
 template <class T>
 bool RedBlackTree<T>::Insert(T item)
 {
-    rb_assert(root);
     if (root != NULL and Search(item) == true) return false;
     Node<T>* x = BSTInsert(item);
     x->is_black = false;
@@ -268,7 +231,9 @@ bool RedBlackTree<T>::Insert(T item)
                 y->is_black = true;
                 x->p->p->is_black = false;  // grandparent to red
                 x = x->p->p;                // move x up the tree
-            }else // uncle is black
+            }
+            
+            else // uncle is black
             {
                 if (x == x->p->right)       // rotate if x is right child
                 {
@@ -372,7 +337,7 @@ bool RedBlackTree<T>::Remove(T item)
         z->data = y->data;   // replace z with y
     }
     if (y->is_black == true) {
-        RBDeleteFixUp(x, x->p, xIsLeft);
+        RBDeleteFixUp(x, z->p, xIsLeft);
     }
     size--;
     return true;
