@@ -337,7 +337,7 @@ bool RedBlackTree<T>::Remove(T item)
         z->data = y->data;   // replace z with y
     }
     if (y->is_black == true) {
-        RBDeleteFixUp(x, z->p, xIsLeft);
+        RBDeleteFixUp(x, y->p, xIsLeft);
     }
     size--;
     return true;
